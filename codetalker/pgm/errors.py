@@ -18,7 +18,7 @@ class TokenError(LineError):
         lines = text.splitlines()
         if lineno-1 < len(lines):
             tease = lines[lineno-1][charno-1:charno+30]
-        Exception.__init__(self, msg + ' at (%d, %d) \'%s\'' % (lineno, charno, tease.encode('string_escape')))
+        Exception.__init__(self, msg + ' at (%d, %d) %r' % (lineno, charno, tease))
         self.lineno = lineno
         self.charno = charno
     pass

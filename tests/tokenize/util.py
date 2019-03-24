@@ -22,7 +22,7 @@ def make_fail(fn, text):
         except TokenError:
             pass
         else:
-            raise AssertionError('was supposed to fail while tokenizing \'%s\' (got %s)' % (text.encode('string_escape'), res))
+            raise AssertionError('was supposed to fail while tokenizing %r (got %s)' % (text, res))
     return meta
 
 def make_test(fn, text, expected=None):

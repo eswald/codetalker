@@ -321,7 +321,7 @@ class Grammar:
                     continue
                 if tokens.at > error[0]:
                     error[0] = tokens.at
-                    error[1] = 'Unexpected token %s; expected \'%s\' (while parsing %s)' % (repr(ctoken), current.encode('string_escape'), self.rule_names[rule])
+                    error[1] = 'Unexpected token %s; expected %r (while parsing %s)' % (repr(ctoken), current, self.rule_names[rule])
                 if logger.output:print>>logger, 'FAIL string compare:', [current, tokens.current().value]
                 return None
             elif type(current) == tuple:

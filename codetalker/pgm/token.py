@@ -9,8 +9,8 @@ class Token(object):
         self.value = value
 
     def __repr__(self):
-        return u'<%s token "%s" at (%d, %d)>' % (self.__class__.__name__,
-                self.value.encode('string_escape'), self.lineno, self.charno)
+        return u'<%s token %r at (%d, %d)>' % (self.__class__.__name__,
+                self.value, self.lineno, self.charno)
 
     def __str__(self):
         return self.value

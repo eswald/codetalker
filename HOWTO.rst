@@ -68,6 +68,8 @@ Defining Rules
     - ``star(zero, or_more)``
     - ``plus(one, or_more)``
     - ``_or(one, of, these)``
+    - ``lookahead(this, stuff)`` # checks the content, but without consuming its tokens.
+    - ``notahead(this, stuff)`` # checks the content, and matches only if it *does not* match.
     - ``_not(this, stuff)`` # checks the content, and if it *does not* match,
       consumes **a single** token.
     - ``TOKEN_NAME``

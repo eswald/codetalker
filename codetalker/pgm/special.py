@@ -27,6 +27,10 @@ class no_ignore(Special):
     char = 'i'
 class _not(Special):
     char = '!'
+class lookahead(Special):
+    char = '@'
+class notahead(Special):
+    char = '~'
 
 import string
 

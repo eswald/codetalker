@@ -125,7 +125,7 @@ cdef extern from "c/parser.h":
         LITERAL, RULE, TOKEN, SPECIAL
 
     enum RuleSpecialType:
-        STAR, PLUS, QUESTION, OR, STRAIGHT, NOIGNORE, NOT
+        STAR, PLUS, QUESTION, OR, STRAIGHT, NOT, NOIGNORE, LOOKAHEAD, NOTAHEAD
 
     struct RuleSpecial:
         RuleSpecialType type
@@ -535,6 +535,10 @@ cdef RuleItem convert_item(object item, bint from_or=False):
             citem.value.special.type = QUESTION
         elif item[0] == '!':
             citem.value.special.type = NOT
+        elif item[0] == '@':
+            citem.value.special.type = LOOKAHEAD
+        elif item[0] == '~':
+            citem.value.special.type = NOTAHEAD
         elif item[0] == 'i':
             citem.value.special.type = NOIGNORE
         # TODO: implement non-greedy +? and *?

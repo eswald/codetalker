@@ -471,6 +471,38 @@ struct cParseNode* check_special(unsigned int rule, struct RuleSpecial special, 
         _kill_ptree(current);
         DEDENT();
         return NULL;
+    } else if (special.type == LOOKAHEAD) {
+        LOG("LOOKAHEAD\n");
+        at = tokens->at;
+        tmp = parse_children(rule, special.option, grammar, tokens, error);
+        if (tmp == NULL) {
+            LOG("No match.\n");
+            _kill_ptree(current);
+            tokens->at = at;
+            DEDENT();
+            return NULL;
+        }
+        LOG("Matched.\n");
+        _kill_ptree(tmp);
+        tokens->at = at;
+        DEDENT();
+        return current;
+    } else if (special.type == NOTAHEAD) {
+        LOG("NOTAHEAD\n");
+        at = tokens->at;
+        tmp = parse_children(rule, special.option, grammar, tokens, error);
+        if (tmp == NULL) {
+            LOG("No match.\n");
+            tokens->at = at;
+            DEDENT();
+            return current;
+        }
+        LOG("Matched.\n");
+        _kill_ptree(current);
+        _kill_ptree(tmp);
+        tokens->at = at;
+        DEDENT();
+        return NULL;
     } else {
         LOG("unknown special type: %d\n", special.type);
         _kill_ptree(current);

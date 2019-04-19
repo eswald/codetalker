@@ -111,6 +111,8 @@ class Grammar:
             raise Exception('no rule options specified in %r' % builder)
         attrs = []
         for attr, dct in rule.astAttrs.iteritems():
+            if isinstance(dct, set):
+                dct = {'type': list(dct), 'single': True}
             if type(dct) != dict:
                 dct = {'type':dct}
             if type(dct['type']) not in (tuple, list):

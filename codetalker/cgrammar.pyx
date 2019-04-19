@@ -595,6 +595,8 @@ cdef object convert_ast_attr(char* name, object ast_attr, object rules, object t
         attr    : the pointer where the finished AstAttr should be stored
     '''
     attr.name = name
+    if isinstance(ast_attr, set):
+        ast_attr = {'type': list(ast_attr), 'single': True}
     if type(ast_attr) != dict:
         ast_attr = {'type':ast_attr}
     attr.single = ast_attr.get('single', type(ast_attr.get('type')) not in (list, tuple))

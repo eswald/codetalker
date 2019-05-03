@@ -406,6 +406,8 @@ struct cParseNode* check_special(unsigned int rule, struct RuleSpecial special, 
                 current = append_nodes(current, tmp);
                 DEDENT();
                 return current;
+            } else {
+                tokens->at = at;
             }
         }
         LOG("fail or\n");

@@ -19,7 +19,8 @@ class RuleLoader(object):
         self.keep_tree = False
 
     def __or__(self, other):
-        self.options.append(self.process(other))
+        item = self.process(other)
+        self.options.append(item)
         return self
 
     def add_option(self, other):
@@ -44,6 +45,8 @@ class RuleLoader(object):
             for item in what:
                 options += self.process(item)
             return [('?',) + tuple(options)]
+        elif isinstance(what, set):
+            return [('|',) + tuple(tuple(self.process(item)) for item in what)]
         elif isinstance(what, Special):
             options = []
             for item in what.items:

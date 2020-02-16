@@ -111,6 +111,8 @@ class Grammar:
             raise Exception('no rule options specified in %r' % builder)
         attrs = []
         for attr, dct in rule.astAttrs.iteritems():
+            if isinstance(dct, set):
+                dct = {'type': list(dct), 'single': True}
             if type(dct) != dict:
                 dct = {'type':dct}
             if type(dct['type']) not in (tuple, list):
@@ -321,7 +323,7 @@ class Grammar:
                     continue
                 if tokens.at > error[0]:
                     error[0] = tokens.at
-                    error[1] = 'Unexpected token %s; expected \'%s\' (while parsing %s)' % (repr(ctoken), current.encode('string_escape'), self.rule_names[rule])
+                    error[1] = 'Unexpected token %s; expected %r (while parsing %s)' % (repr(ctoken), current, self.rule_names[rule])
                 if logger.output:print>>logger, 'FAIL string compare:', [current, tokens.current().value]
                 return None
             elif type(current) == tuple:

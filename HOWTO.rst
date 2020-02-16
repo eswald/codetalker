@@ -104,6 +104,11 @@ Simple
     match the first element of atype [becomes None if there are no elements
     matching atype]
 
+:{atype, anothertype}:
+
+    match the first element of any of the contained types [becomes None if
+    there are no matching elements]
+
 :[atype]: match all elements of atype [becomes a list]
 :[atype, anothertype]:
 
@@ -116,13 +121,12 @@ The complex definition is a dictionary, where the ``type`` parameter follows
 the *simple* definition above.
 
 :type: atype | [atype] | [atype, anothertype]
-:single: (bool) only use if you want to override the normal inference.
+:single: (bool) return one element (or None) instead of a list
 :start: (int) used for slicing (default: 0)
 :end: (int) also for slicing (default: 0 [means no limit])
 :step: (int) (default: 1)
 
-As you can see, if you don't need to slice or override the "single" aspect,
-you can just use the simple spec.
+As you can see, if you don't need to slice, you can just use the simple spec.
 
 And here's an example from a calculator:
 

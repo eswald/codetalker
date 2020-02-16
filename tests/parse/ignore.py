@@ -43,7 +43,7 @@ def mfail(what):
         except ParseError:
             pass
         else:
-            raise AssertionError('was supposed to fail on \'%s\'' % what.encode('string_escape'))
+            raise AssertionError('was supposed to fail on %r' % what)
     return meta
 
 for i, st in enumerate(strings[0]):

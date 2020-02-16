@@ -92,7 +92,7 @@ def make_fail(grammar, text):
     def meta(self):
         try:
             tree = grammar.process(text)
-            self.fail('Expected "%s" to fail' % text.encode('string_escape'))
+            self.fail('Expected %r to fail' % text)
         except ParseError:
             pass
     return meta
